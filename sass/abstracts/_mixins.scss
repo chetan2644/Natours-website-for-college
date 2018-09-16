@@ -1,0 +1,65 @@
+@mixin clearfix {
+  &::after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+// MEDIA QUERIES MANAGER
+
+/*
+0 - 600px: phone 
+600- 900px: Tablet portrait
+900 - 1200px: Tablet Landscape
+[1200-1800] is where our normal styles apply
+1800px + : Big desktop
+
+
+This is just for an example better way of doing this thing is in down there
+@mixin respond-phone {
+   @media (max-width: 600px) { @content };
+}
+
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+In media queries ems and rems behave differently rather they default. so here both rems and ems are equal. But developer prefer ems becasue it works best in all the browsers. 
+so we should use ems as a unit in case of media queries. 
+ems and rems are not affected by root font size settings. say font-size; 62.5% here.
+
+1em or 1rem is always equal to the font size that is coming. ie by default 16px but if user changes it to let say 20px then it will be 20px.
+1em = 16px (this is default size of em)
+
+ORDER: Base + typography > general layout + grid > page layout > components
+*/  
+
+@mixin respond($breakpoint){
+    @if $breakpoint == phone {
+      @media only screen and (max-width: 37.5em) { @content };      //600px
+    }
+  
+    @if $breakpoint == tab-port {
+      @media only screen and (max-width: 56.25em) { @content };       //900px
+    }
+
+    @if $breakpoint == tab-land {
+      @media only screen and (max-width: 75em) { @content };      //1200px
+    }
+
+    @if $breakpoint == big-desktop {
+      @media only screen and (min-width: 112.5em) { @content };      //1800px
+    }
+}

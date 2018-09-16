@@ -1,0 +1,94 @@
+.story {
+     width: 75%;
+     margin: 0 auto;
+     box-shadow: 0 3rem 6rem rgba($color-black, .1);
+     background-color: rgba($color-white, .6);
+     border-radius: 3px;
+     padding: 6rem;
+     padding-left: 9rem;
+     font-size: $default-font-size;
+     transform: skew(-12deg);
+
+     @include respond(tab-port) {
+       width: 100%;
+       padding: 4rem;
+       padding-left: 7rem;
+     }
+
+     @include respond(phone) {
+      transform: skew(0);
+     }
+
+    //  & > * {
+    //    transform: skewX(12deg);  //two transform can't work together here transform: translate and transform: skewX so this thing will not gonna work here and we are commenting it.
+    //  }
+
+    &__shape {
+      width: 15rem;
+      height: 15rem;
+      background-color: orangered;
+      float: left;
+ //to make figure look like circle we are using this property. 
+      transform: translateX(-3rem) skewX(12deg);  // if elements are floated it is better to use transform translate property instead of margin.
+      position: relative;
+      overflow: hidden;   //just to stop the image overflowing from its container.
+      border-radius: 50%;
+      
+      // support property is for testing the properties in the browser if they work on particular browser or not. like if clip-path: polygon(0 0) here we can put anything in polygon so we just put 0 0 here. If this property worked(or supported) in that browser then this will hold true and properties inside it will get applied. 
+      @supports(clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)){
+        -webkit-shape-outside: circle(50% at 50% 50%); 
+        shape-outside: circle(50% at 50% 50%); //Defines how the content will be float around the element.  //first 50% signify the radius that will be computed by doing half of height and width. This property require the element to be float. so this property will require width, height and float. 
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%); 
+      }
+    
+
+      @include respond(phone) {
+        transform: translate(-3rem) skew(0);
+       }
+    }
+
+    &__img {
+      height: 100%; //we need to define the width for flexible responsive images. But one thing also to notice here is that width of this image is greater than its height. so to make it cover in cirle we use height 100% instead of width 100%.
+      transform: translateX(-4rem) scale(1.4);
+      backface-visibility: hidden;  //this always fix the glitch that occure due to properties like transform and translate.
+      transition: all .5s;
+    }
+
+    &__text {
+      transform: skewX(12deg);
+
+      @include respond(phone) {
+        transform: skew(0);
+       }
+    }
+
+    &__caption {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 20%);
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 1.7rem;
+      color: $color-white;
+      opacity: 0;
+      transition: all .5s;  //we always declare it in parent element.
+      backface-visibility: hidden; //it is here to remove that glitch that is occuring on hovering sidewards.
+    }
+
+    &:hover &__caption {
+      opacity: 1;
+      // transform: translateY(-50%) this will not work here the belowe property will work becasue to override above property we need to replace it with the same name.
+      transform: translate(-50%, -50%);   //the above transform is changed here the Y coordinate is changed to -50% from 20% earlier. 
+      
+    }
+
+    &:hover &__img {
+      transform: translateX(-4rem) scale(1);
+      filter:brightness(80%) blur(3px);
+      transition: filter .3s;
+      transition: transform .3s;
+
+    }
+}

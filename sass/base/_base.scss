@@ -1,0 +1,60 @@
+// basic definition of our entire project
+// partial scss file like all others starting from _
+
+// This file will be for low level basics such as resets and styles for the HTML and body element selectors.
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html{
+  //This defines what 1 rem is
+  font-size: 62.5%;  //1 rem = 10px; 10px/16px = 62.5%
+/*
+  This is for Example
+  @include respond-phone {
+    font-size: 50%;
+  }
+
+  Actual code starts here
+ we dont need this media query because like if device size is 500px then it will satisfy bot the below media queries of phone and tob-port and both media queries have same font size so we dont need the first media query.
+  @include respond(phone){
+    font-size: 50%;
+  } */
+
+//media queries should be in sequence of bigger size media queries first than after that in the last smaller size screen media queries will come.
+
+  @include respond(big-desktop){
+    font-size: 75%;  // 1rem =12, 12/16 =  75%
+  }
+
+  @include respond(tab-land){  // width <= 1200?
+    font-size: 56.25%;  //1rme = 9px, 8/16 = 56.25%
+  }
+
+  @include respond(tab-port){  // width <= 900?
+    font-size: 50%;   //1rem = 8px, 8/16 = 50%
+  }
+
+}
+
+
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port){ 
+    padding: 0;  
+  }
+
+}
+
+// when the user will select the text he will be able to see the highlighted text in the color that we specify in background-color property.
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}

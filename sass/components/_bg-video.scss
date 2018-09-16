@@ -1,0 +1,18 @@
+.bg-video {
+  position:absolute;
+  top:0;
+  left:0;
+  //will inherit the same height as that of parent.
+  height:100%;  
+  //will inherit the same width as that of parent.
+  width:100%;
+  z-index: -1;
+  opacity: .15;
+  overflow:hidden;
+
+    &__content {
+    height: 100%;
+    width:100%;
+    object-fit:cover;  //just like background image property..it will maintain aspect ratio.
+    }
+}
