@@ -14,7 +14,7 @@
     "build:css": "npm-run-all compile:sass concat:css prefix:css compress:css",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://MohitSharma107.github.io/Natours--website",
+  "homepage": "https://MohitSharma107.github.io/Natours-website-for-college",
   "keywords": [
     "Mohit"
   ],
